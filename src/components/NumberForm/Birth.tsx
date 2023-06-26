@@ -7,14 +7,15 @@ import { NumberFormType } from ".";
 
 const KEY: Extract<keyof NumberFormType, "birth"> = "birth";
 
-function format(value: string) {
+function format(value: string): string {
   if (!value) return "";
 
+  // "XX/XX/XXXX"
   let month = value.slice(0, 2);
   let day = value.slice(2, 4);
   let year = value.slice(4, 8);
 
-  // Month must be between 01 and 12
+  // "01~12/XX/XXXX"
   if (month.length === 2) {
     const monthNumber = Number(month);
     if (monthNumber < 1) {
@@ -23,7 +24,7 @@ function format(value: string) {
       month = "12";
     }
   }
-  // Day must be between 01 and 31
+  // "01~12/01~31/XXXX"
   if (day.length === 2) {
     const dayNumber = Number(day);
     if (dayNumber < 1) {
@@ -32,7 +33,7 @@ function format(value: string) {
       day = "31";
     }
   }
-  // Year seems to be between 1900 and today
+  // "01~12/01~31/1900~today"
   if (year.length === 4) {
     const yearNumber = Number(year);
     if (yearNumber < 1900) {

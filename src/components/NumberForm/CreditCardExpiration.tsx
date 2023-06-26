@@ -8,13 +8,14 @@ import { NumberFormType } from ".";
 const KEY: Extract<keyof NumberFormType, "creditCardExpiration"> =
   "creditCardExpiration";
 
-function format(value: string) {
+function format(value: string): string {
   if (!value) return "";
 
+  // "XX/XX"
   let month = value.slice(0, 2);
   const year = value.slice(2, 4);
 
-  // Month must be between 01 and 12
+  // "01~12/XX"
   if (month.length === 2) {
     const monthNumber = Number(month);
     if (monthNumber < 1) {
