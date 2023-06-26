@@ -15,6 +15,9 @@ function format(value: string): string {
   let infix = value.slice(3, 7);
   let postfix = value.slice(7, 11);
 
+  // "0XX-XXXX-XXXX"
+  if (!prefix.startsWith("0")) prefix = "0" + prefix;
+
   // "02-XXXX-XXXX"
   if (prefix.startsWith("02")) {
     prefix = value.slice(0, 2);
@@ -32,7 +35,7 @@ function format(value: string): string {
     prefix !== "010"
   ) {
     prefix = "010";
-    // "XXX-XXX-XXXX"
+    // "0XX-XXX-XXXX"
   } else if (infix.length === 4 && postfix.length === 3) {
     infix = value.slice(3, 6);
     postfix = value.slice(6, 10);
